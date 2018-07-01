@@ -1,0 +1,5 @@
+#!/bin/bash
+/scripts/wizard_1st
+sed -i 's+/scripts/wizard_1st+# -- disabled, during 1st run -- /scripts/wizard_1st+g' /scripts/start_tnn
+/usr/bin/screen -S tnn -D -m /usr/local/tnn/tnn
+/bin/bash

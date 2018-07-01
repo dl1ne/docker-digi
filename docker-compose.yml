@@ -1,0 +1,20 @@
+version: '3'
+services:
+  tnn:
+    build:
+     context: ./tnn179mh06/
+     args:
+      pwsysop: 12345678901234567890123456789012345678901234567890123456789012345678901234567890
+      pwconsole: geheimespw
+      nodeident: Test
+      nodecall: DL1NE
+      port1: 9k6_User|/dev/ttyS0|1|9600
+      port15: AX25IP|AX25IP|8|19200d
+    ports:
+     - 10093:10093/udp
+    volumes:
+     - ./tnn179mh06/:/cfg
+    devices:
+     - /dev/ttyS0:/dev/ttyS0
+    restart: unless-stopped
+

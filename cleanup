@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Cleanup old files..."
+cd /opt/docker/digi/tnn179mh06/
+rm -rf ax25ip.cfg parms.tnb tnn179.pas tnn179.tnb tnn.ini
+cd ..
+echo "Cleanup Docker..."
+docker container rm -f digi_tnn_1
+docker image rm -f digi_tnn
+echo "Finished!"
+docker-compose up -d
+
+docker exec -i -t digi_tnn_1 /bin/bash

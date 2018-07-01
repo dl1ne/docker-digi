@@ -1,0 +1,38 @@
+#!/bin/bash
+TNNPATH=/usr/local/tnn
+
+echo "Setting up Ports of TNN..."
+echo >> $TNNPATH/tnn.ini
+echo >> $TNNPATH/tnn.ini
+echo "# -----------------------------------------------------" >> $TNNPATH/tnn.ini
+echo "# Ports created with util wizard_ports, during build" >> $TNNPATH/tnn.ini
+echo "# -----------------------------------------------------" >> $TNNPATH/tnn.ini
+i=0
+for var in "$@"
+do
+    i=$((i+1))
+    if [ "$var" != "" ]; then
+	echo "Port $i: $var"
+	pname=`echo "$var" | cut -d '|' -f1`
+	device=`echo "$var" | cut -d '|' -f2`
+	kiss=`echo "$var" | cut -d '|' -f3`
+	speed=`echo "$var" | cut -d '|' -f4`
+	lock=`echo "$var" | cut -d '|' -f5`
+	echo "#" >> $TNNPATH/tnn.ini
+	echo "# Port $i" >> $TNNPATH/tnn.ini
+	echo "device $device" >> $TNNPATH/tnn.ini
+	echo "kisstype $kiss" >> $TNNPATH/tnn.ini
+	echo "port $i" >> $TNNPATH/tnn.ini
+	if [ "$speed" != "" ]; then
+		echo "speed $speed" >> $TNNPATH/tnn.ini
+	else
+		speed=1200
+	fi
+	if [ "$lock" != "" ]; then
+		echo "tnn_lockfile $lock" >> $TNNPATH/tnn.ini
+	fi
+	sed -i "s/port\s\+$i NAME.*/port $i NAME=$pname ON MODE=$speed MH=1/g" $TNNPATH/tnn179.tnb
+        cat $TNNPATH/tnn179.tnb | grep "port $i"
+    fi
+done
+cat $TNNPATH/tnn179.tnb
