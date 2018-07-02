@@ -35,7 +35,7 @@ docker logs --tail 100 digi_openbcm_1
 # topology
 Folgende Topologie wird erzeugt:
 ```
-                            Docker Host
+    Modems/HF               Docker Host              Netzwerkverbindungen
                       |---------------------|
                       |                     |
                       |    |----------|     |
