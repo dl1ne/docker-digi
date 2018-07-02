@@ -8,6 +8,8 @@ services:
       pwconsole: geheimespw
       nodeident: Test
       nodecall: DL1NE
+      location: Hannover, NDS, DE
+      locator: JO42VJ
       port1: 9k6_User|/dev/ttyS0|1|9600
       port15: AX25IP|AX25IP|8|19200d
     ports:

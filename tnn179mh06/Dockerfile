@@ -6,6 +6,8 @@ ARG pwsysop
 ARG pwconsole
 ARG nodeident
 ARG nodecall
+ARG location="Unbekannt"
+ARG locator="UNKN"
 ARG port1=""
 ARG port2=""
 ARG port3=""

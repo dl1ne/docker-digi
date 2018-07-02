@@ -65,4 +65,38 @@ echo
 echo "Your tnn179.tnb:"
 cat $TNNPATH/tnn179.tnb
 echo
-
+echo
+echo "Setting up some other defaults..."
+#
+# ctext.txt
+#
+if [ ! -f $TNNPATH/ctext.txt ]; then
+    echo "*****************************************************************" > $TNNPATH/ctext.txt
+    echo "* Digipeater: ${nodecall}                        ${location}" >> $TNNPATH/ctext.txt
+    echo "* Locator   : ${locator}" >> $TNNPATH/ctext.txt
+    echo "*" >> $TNNPATH/ctext.txt
+    echo "*   (A)ktuell: %A       (I)nfo      (M)ailbox = ${nodecall}-4" >> $TNNPATH/ctext.txt
+    echo "*   (U)ser                    (Q)uit      (N)odes" >> $TNNPATH/ctext.txt
+    echo "*   (CONV)ers                 (H)ilfe     (MH)eard" >> $TNNPATH/ctext.txt
+    echo "*" >> $TNNPATH/ctext.txt
+    echo "*****************************************************************" >> $TNNPATH/ctext.txt
+    echo "* This Digi based on Docker: https://github.com/dl1ne/docker-digi" >> $TNNPATH/ctext.txt
+    echo "* created by HamNET Group AS64636, DL1NE" >> $TNNPATH/ctext.txt
+    echo "*****************************************************************" >> $TNNPATH/ctext.txt
+fi
+#
+# aktuell.txt
+#
+if [ ! -f $TNNPATH/textcmd/aktuell.txt ]; then
+    echo " 03.07.2018, DL1NE" > $TNNPATH/textcmd/aktuell.txt
+    echo "=============================================" >> $TNNPATH/textcmd/aktuell.txt
+    echo " Docker Images sind soweit lauffaehig," >> $TNNPATH/textcmd/aktuell.txt
+    echo " eine Verbindung mit OpenBCM unter -4 " >> $TNNPATH/textcmd/aktuell.txt
+    echo " ist ebenso moeglich." >> $TNNPATH/textcmd/aktuell.txt
+fi
+#
+# info.txt
+#
+if [ ! -f $TNNPATH/textcmd/info.txt ]; then
+    echo "TheNetNode Digi basierend auf Docker Images :-)" > $TNNPATH/textcmd/info.txt
+fi

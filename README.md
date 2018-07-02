@@ -21,6 +21,16 @@ Fuer einen Neustart der Container:
 ```
 docker-compose restart
 ```
+Um sich auf die Konsole vom TNN zu schalten, ist das Tool Screen installiert. Dieses kann virtuelle Konsolen erstellen und laesst diese auch nach einem Disconnect weiter offen:
+```
+docker exec -i -t digi_tnn_1 /bin/bash
+screen -r tnn
+```
+Logs von der Mailbox/OpenBCM lassen sich abrufen mit:
+```
+docker logs --tail 100 digi_openbcm_1
+```
+
 
 # topology
 Folgende Topologie wird erzeugt:
@@ -55,6 +65,8 @@ Nachfolgend werden die Parameter fuer TNN (TheNetNode) genauer beschrieben.
       pwconsole: <pw2>            Sysop-Passwort fuer den Consolen Zugriff
       nodeident: <ident>          Ident des Digis
       nodecall: <callsign>        Rufzeichen vom Digi
+      location: <location>        Standort vom Digi
+      locator: <locator>          Locator vom Standort
       port1: <options>            \
       [...]                        |- port1 bis port15 sind moegliche Ports (Beschreibung unten)
       port15: <options>           /

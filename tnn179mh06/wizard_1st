@@ -8,7 +8,7 @@ CFGPATH=/cfg
 if [ ! -f $TNNPATH/parms.tnb ]; then
     cp $TNNPATH/tnn179.tnb $TNNPATH/parms.tnb
 fi
-files=( "ax25ip.cfg" "parms.tnb" "tnn179.pas" "tnn179.tnb" "tnn.ini" )
+files=( "ax25ip.cfg" "ctext.txt" "parms.tnb" "tnn179.pas" "tnn179.tnb" "tnn.ini" )
 for i in "${files[@]}"
 do
     echo "Checking file: $i"
@@ -22,7 +22,22 @@ do
     rm -rf $TNNPATH/$i
     ln -s $CFGPATH/$i $TNNPATH/$i
 done
-
+#
+folders=( sysexe textcmd userexe )
+for i in "${folders[@]}"
+do
+    echo "Checking folder: $i"
+    if [ ! -d "$CFGPATH/$i" ]; then
+       echo "Folder not found, creating the central folder..."
+       mkdir $CFGPATH/$i
+       chown root:root $CFGPATH/$i
+       chmod 0660 $CFGPATH/$i
+       cp $TNNPATH/$i/* $CFGPATH/$i/
+    fi
+    echo "Creting symbolic link..."
+    rm -rf $TNNPATH/$i
+    ln -s $CFGPATH/$i $TNNPATH/$i
+done
 #
 # On the fly config
 #
