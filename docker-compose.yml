@@ -17,4 +17,8 @@ services:
     devices:
      - /dev/ttyS0:/dev/ttyS0
     restart: unless-stopped
-
+  openbcm:
+    build:
+     context: ./openbcm1.07b12/
+    volumes:
+     - ./openbcm1.07b12/:/cfg

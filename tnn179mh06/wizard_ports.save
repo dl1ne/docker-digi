@@ -1,0 +1,37 @@
+#!/bin/bash
+TNNPATH=/usr/local/tnn
+
+echo "Setting up Ports of TNN..."
+echo >> $TNNPATH/tnn.ini
+echo >> $TNNPATH/tnn.ini
+echo "# -----------------------------------------------------" >> $TNNPATH/tnn.ini
+echo "# Ports created with util wizard_ports, during build" >> $TNNPATH/tnn.ini
+echo "# -----------------------------------------------------" >> $TNNPATH/tnn.ini
+i=0
+for var in "$@"
+do
+    i=$((i+1))
+    if [ "$var" != "" ]; then
+	echo "Port $i: $var"
+	pname=`echo "$var" | cut -d '|' -f1`
+	device=`echo "$var" | cut -d '|' -f2`
+	kiss=`echo "$var" | cut -d '|' -f3`
+	speed=`echo "$var" | cut -d '|' -f4`
+	lock=`echo "$var" | cut -d '|' -f5`
+	echo "#" >> $TNNPATH/tnn.ini
+	echo "# Port $i" >> $TNNPATH/tnn.ini
+	echo "device $device" >> $TNNPATH/tnn.ini
+	echo "kisstype $kiss" >> $TNNPATH/tnn.ini
+	echo "port $i" >> $TNNPATH/tnn.ini
+	if [ "$speed" != "" ]; then
+		echo "speed $speed" >> $TNNPATH/tnn.ini
+	else
+		speed=1200
+	fi
+	if [ "$lock" != "" ]; then
+		echo "tnn_lockfile $lock" >> $TNNPATH/tnn.ini
+	fi
+	sed -i 's/PORT $i NAME.*/PORT $i NAME=$pname ON MODE=$speed TXD=25 MAX=2 DAMA= 0 CTEXT=0 SYSOP=0 MH=1 MAXCON=0 EAXMAXF=16 EAXMODE=1 RETRY=20a/g' $TNNPATH/tnn179.tnb
+    fi
+done
+cat $TNNPATH/

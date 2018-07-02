@@ -1,0 +1,21 @@
+--- a/makefile
++++ b/makefile
+@@ -16,7 +16,7 @@ GPP_VERSION3 := \
+ GPP_VERSION33 := \
+   $(shell $(CROSS_COMPILE)g++-3.3 --version | grep g++ | sed 's/.*g++ (.*) //g' | sed 's/\..*//' | grep 3)
+ GPP_VERSION4 := \
+-  $(shell $(CROSS_COMPILE)g++ --version | grep g++ | sed 's/.*g++ (.*) //g' | sed 's/\..*//' | grep 4)
++  $(shell $(CROSS_COMPILE)g++-4.9 --version | grep g++ | sed 's/.*g++ (.*) //g' | sed 's/\..*//' | grep 4)
+
+ GIT_VERSION := $(shell git describe --abbrev=7 --dirty --always --tags || echo "?????")
+
+@@ -24,7 +24,7 @@ ifeq "$(GPP_VERSION33)" "3"
+   CC = g++-3.3
+   LD = $(CC)
+ else
+-  CC = $(CROSS_COMPILE)g++
++  CC = $(CROSS_COMPILE)g++-4.9
+   LD = $(CC)
+ endif
+ # ---------------------- armv6 (raspberry) specific ---------------------------
+

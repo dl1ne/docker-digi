@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /usr/local/openbcm
+./bcm &
+sleep 15
+kill `pidof bcm`

@@ -1,0 +1,5 @@
+#!/bin/bash
+/scripts/wizard_2nd
+sed -i 's+/scripts/wizard_2nd+# -- disabled, during 1st run -- /scripts/wizard_2nd+g' /scripts/start_bcm
+cd /usr/local/openbcm
+./bcm
