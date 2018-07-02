@@ -13,12 +13,21 @@ services:
     ports:
      - 10093:10093/udp
     volumes:
-     - ./tnn179mh06/:/cfg
+     - ./conf/tnn/:/cfg
     devices:
      - /dev/ttyS0:/dev/ttyS0
     restart: unless-stopped
   openbcm:
     build:
      context: ./openbcm1.07b12/
+     args:
+      boxaddr: DL1NE.#NDS.DEU.EU
+      mycall: DL1NE
+      sysop: DL1NE
+    ports:
+     - 8081:8080
+     - 8025:8025
+     - 8110:8110
+     - 8119:8119
     volumes:
-     - ./openbcm1.07b12/:/cfg
+     - ./conf/openbcm/:/cfg

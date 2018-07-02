@@ -5,17 +5,33 @@ CFGPATH=/cfg
 #
 # Initial Setup
 #
-files=( bidh2.bcm  bids3.bcm bulletin.bak bulletin.bcm core.6 crontab.bcm fwd fwd.bcm hadr4.bcm hadrhash.bcm http info init.bcm init.l2 log msg speech.bcm trace user userh2.bcm users4.bak users4.bcm )
+files=( bidh2.bcm  bids3.bcm bulletin.bak bulletin.bcm core.6 crontab.bcm fwd fwd.bcm hadr4.bcm hadrhash.bcm init.bcm init.l2 speech.bcm userh2.bcm users4.bak users4.bcm )
 for i in "${files[@]}"
 do
     echo "Checking file: $i"
-    if [ ! -e "$CFGPATH/$i" ]; then
+    if [ ! -f "$CFGPATH/$i" ]; then
        echo "File not found, creating the central file..."
-       mv $BCMPATH/$i $CFGPATH/$i
+       mv $BCMPATH/$i $CFGPATH/
        chown root:root $CFGPATH/$i
        chmod 0660 $CFGPATH/$i
     fi
     echo "Creating symbolic link..."
+    rm -rf $BCMPATH/$i
+    ln -s $CFGPATH/$i $BCMPATH/$i
+done
+#
+#
+folders=( http info log msg temp trace user )
+for i in "${folders[@]}"
+do
+    echo "Checking folder: $i"
+    if [ ! -d "$CFGPATH/$i" ]; then
+       echo "Folder not found, creating the central folder..."
+       mkdir $CFGPATH/$i
+       chown root:root $CFGPATH/$i
+       chmod 0660 $CFGPATH/$i
+    fi
+    echo "Creting symbolic link..."
     rm -rf $BCMPATH/$i
     ln -s $CFGPATH/$i $BCMPATH/$i
 done

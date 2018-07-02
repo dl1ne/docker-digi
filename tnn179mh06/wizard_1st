@@ -5,14 +5,14 @@ CFGPATH=/cfg
 #
 # Initial Setup
 #
-if [ ! -e $TNNPATH/parms.tnb ]; then
+if [ ! -f $TNNPATH/parms.tnb ]; then
     cp $TNNPATH/tnn179.tnb $TNNPATH/parms.tnb
 fi
 files=( "ax25ip.cfg" "parms.tnb" "tnn179.pas" "tnn179.tnb" "tnn.ini" )
 for i in "${files[@]}"
 do
     echo "Checking file: $i"
-    if [ ! -e "$CFGPATH/$i" ]; then
+    if [ ! -f "$CFGPATH/$i" ]; then
        echo "File not found, creating the central file..."
        mv $TNNPATH/$i $CFGPATH/$i
        chown root:root $CFGPATH/$i

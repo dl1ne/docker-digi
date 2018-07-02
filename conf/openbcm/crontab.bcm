@@ -1,0 +1,14 @@
+;------------------------------------------
+;minute   hour  day month weekday   command
+;------------------------------------------
+*            *    *     *       *   minute
+*/5          *    *     *       *   fiveminute
+0,15,30,45   *    *     *       *   quarter
+0,30         *    *     *       *   halfhour
+1,31         *    *     *       *   beacon
+3,33         *    *     *       *   forward
+35           1    *     *       *   afwdlist
+5            2    *     *       *   postfwd
+5            3    *     *       *   purge
+35           3    *     *       *   save
+5            4    *     *       0   reorg

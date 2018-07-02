@@ -32,8 +32,10 @@ MAINTAINER Simon Brecht <simon@brecht.email>
 ADD . /scripts
 
 # Update application repository list and install common Linux tools
+#RUN apt-get update && apt-get install -y git wget curl \
+# && apt-get install ax25* libax25* make gcc bzip2 screen -y
 RUN apt-get update && apt-get install -y git wget curl \
- && apt-get install ax25* libax25* make gcc bzip2 screen -y
+ && apt-get install make gcc bzip2 screen -y
 
 # =================================================================================
 # START: Install TNN

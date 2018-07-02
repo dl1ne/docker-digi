@@ -8,6 +8,7 @@ echo "# -----------------------------------------------------" >> $TNNPATH/tnn.i
 echo "# Ports created with util wizard_ports, during build" >> $TNNPATH/tnn.ini
 echo "# -----------------------------------------------------" >> $TNNPATH/tnn.ini
 i=0
+axipport=-1
 for var in "$@"
 do
     i=$((i+1))
@@ -18,6 +19,9 @@ do
 	kiss=`echo "$var" | cut -d '|' -f3`
 	speed=`echo "$var" | cut -d '|' -f4`
 	lock=`echo "$var" | cut -d '|' -f5`
+	if [ $kiss -eq 8 ]; then
+		axipport=$i
+	fi
 	echo "#" >> $TNNPATH/tnn.ini
 	echo "# Port $i" >> $TNNPATH/tnn.ini
 	echo "device $device" >> $TNNPATH/tnn.ini
@@ -35,4 +39,30 @@ do
         cat $TNNPATH/tnn179.tnb | grep "port $i"
     fi
 done
+echo
+echo 
+if [ $axipport -ne -1 ]; then
+	echo "Setting up AX25IP..."
+	sed -i "s/socket ip/# socket ip/g" $TNNPATH/ax25ip.cfg
+	sed -i "s/#socket udp 10093/socket udp 10093/g" $TNNPATH/ax25ip.cfg
+	sed -i "s/^route/#route/g" $TNNPATH/ax25ip.cfg
+	sed -i "s/#route default.*/route default 44.225.65.146 udp 10093/g" $TNNPATH/ax25ip.cfg
+	echo "route db0luh 44.225.65.146 udp 10093" >> $TNNPATH/ax25ip.cfg
+	echo "route db0ner 44.225.65.194 udp 10093" >> $TNNPATH/ax25ip.cfg
+	echo "route db0uhi 44.225.64.194 udp 10092" >> $TNNPATH/ax25ip.cfg
+	echo "route dk0mav 44.225.94.130 udp 10092" >> $TNNPATH/ax25ip.cfg
+	echo
+	echo
+	echo "Setting up OpenBCM Link..."
+	echo "LINK + L  15 ${nodeident} ${nodecall}-4" >> $TNNPATH/tnn179.tnb
+	echo "MAILBOX ${nodecall}-4" >> $TNNPATH/tnn179.tnb
+	echo "route ${nodecall}-4 openbcm udp 10091" >> $TNNPATH/ax25ip.cfg
+	echo
+	echo
+fi
+echo
+echo
+echo "Your tnn179.tnb:"
 cat $TNNPATH/tnn179.tnb
+echo
+
