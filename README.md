@@ -52,3 +52,18 @@ port2=AX25IP|AX25IP|8
 # 10 = Kernel-AX.25, 11 = DG1KJD Kernel-AX.25
 # 12 = 6PACK
 ```
+
+# todo
+```
+- OpenBCM als Mailbox einbinden
+
+- IP Routing fuer TNN hinzufuegen
+--> Kernel Konfiguration
+--> iptables Regeln vom Docker-Host
+--> Routing
+
+- Wizard fuer TNN Konfiguration von erweiterten Parametern bauen
+--> Links
+--> AX25IP Routing
+--> Meldungen (Connect, Aktuell, etc)
+```
