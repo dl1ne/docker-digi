@@ -2,4 +2,8 @@
 
 echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" >>/etc/apt/sources.list
 echo "deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
-apt-get update && apt-get install g++-4.9 g++-multilib g++-4.9-multilib gcc-4.9 -y
+if [ `uname -a | grep -c "armv7l"` -ne 1 ]; then
+	apt-get update && apt-get install g++-4.9 g++-multilib g++-4.9-multilib gcc-4.9 -y
+else
+	apt-get update && apt-get install g++-4.9 gcc-4.9 -y
+fi
