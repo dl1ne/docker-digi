@@ -54,6 +54,10 @@ Folgende Topologie wird erzeugt:
                                                            erreichbar
 ```
 
+# tested
+Das Setup wurde erfolgreich auf einer x86_64 Plattform, wie aber auch armv7l (=Raspberry) getestet.
+
+
 # tnn: configuration
 Nachfolgend werden die Parameter fuer TNN (TheNetNode) genauer beschrieben.
 ```
@@ -119,8 +123,6 @@ Nachfolgend eine Uebersicht ueber die Konfiguration der OpenBCM:
 
 # todo
 ```
-- Docker Setup auf Raspberry testen (kein AMD64!)
-
 - IP Routing fuer TNN hinzufuegen
 --> Kernel Konfiguration
 --> iptables Regeln vom Docker-Host
