@@ -29,6 +29,12 @@ MAINTAINER Simon Brecht <simon@brecht.email>
 # Add Scripts to Image
 ADD . /scripts
 
+# Workaround for Windows Newline
+RUN sed -i -e 's/\r$//' /scripts/start_bcm \
+ && sed -i -e 's/\r$//' /scripts/wizard_1st \
+ && sed -i -e 's/\r$//' /scripts/wizard_2nd \
+ && sed -i -e 's/\r$//' /scripts/wizard_g++-4.9-libs
+
 # Update application repository list and install common Linux tools
 #RUN apt-get update && apt-get install -y git wget curl \
 # && apt-get install ax25* libax25* make gcc bzip2 screen g++ -y
